@@ -99,15 +99,30 @@ Opens on port **5174** so it does not clash with the original web app on 5173.
 - Place search, map pins, via stop, drive/walk/bike
 - Sun/shade seat recommendation, colored route, timeline scrubber
 - Recent trips, km/mi, light/dark tiles, share/copy
+- **Settings** (preferences, privacy/terms links, clear data, About)
+- Offline banner when the network is unavailable
 - Native geolocation permissions via `@capacitor/geolocation`
 - Status bar styling and Android back-button handling
+
+## Store readiness
+
+See **[STORE_PUBLISH.md](../STORE_PUBLISH.md)** for Play Store / App Store steps.
+
+Shipped in this project for store builds:
+
+- Privacy Policy + Terms (`public/legal/`)
+- Branded adaptive icons + brand colors
+- Android `targetSdk` / `compileSdk` **36**
+- HTTPS-only network security, backup disabled, R8 minify
+- iOS privacy manifest + when-in-use location only
+- Optional release signing via `android/keystore.properties` (never commit secrets)
 
 ## Limitations
 
 - **iOS builds require a Mac** with Xcode. On Windows you can develop/sync the project, but you cannot compile or run the iOS app locally.
-- Still depends on public APIs (OSRM, Open-Meteo, Nominatim, CARTO tiles) — needs network access.
+- Still depends on public APIs (OSRM, Open-Meteo, Nominatim, CARTO tiles) — needs network access; host your own router for high traffic.
 - Clear-sky sun geometry only (same as the web app).
-- For store release you will add icons/splash screens and signing certificates.
+- Upload keystore, Apple Team, Play/App Store accounts, and public HTTPS privacy URL are **your** responsibility (see STORE_PUBLISH.md).
 
 ## Updating after code changes
 

@@ -1,0 +1,21 @@
+C:\Users\bhand\Downloads\Fristname- Downloads\Sun-Tracking-Main\Sun-Tracking-Expo\node_modules\expo\node_modules\@expo\cli\build\src\utils\errors.js:130
+    throw error;
+    ^
+
+Error: ENOENT: no such file or directory, watch 'C:\Users\bhand\Downloads\Fristname- Downloads\Sun-Tracking-Main\Sun-Tracking-Expo\node_modules\@react-native\babel-plugin-codegen\node_modules\@react-native\codegen\lib\generators\components\GeneratePropsJavaPojo'
+    at FSWatcher.<computed> (node:internal/fs/watchers:254:19)
+    at Object.watch (node:fs:2549:36)
+    at #watchdir (C:\Users\bhand\Downloads\Fristname- Downloads\Sun-Tracking-Main\Sun-Tracking-Expo\node_modules\@expo\metro-file-map\build\watchers\FallbackWatcher.js:164:38)
+    at C:\Users\bhand\Downloads\Fristname- Downloads\Sun-Tracking-Main\Sun-Tracking-Expo\node_modules\@expo\metro-file-map\build\watchers\FallbackWatcher.js:268:39
+    at Walker.<anonymous> (C:\Users\bhand\Downloads\Fristname- Downloads\Sun-Tracking-Main\Sun-Tracking-Expo\node_modules\@expo\metro-file-map\build\watchers\FallbackWatcher.js:410:33)
+    at Walker.emit (node:events:519:28)
+    at C:\Users\bhand\Downloads\Fristname- Downloads\Sun-Tracking-Main\Sun-Tracking-Expo\node_modules\walker\lib\walker.js:69:16
+    at FSReqCallback.oncomplete (node:fs:187:23) {
+  errno: -4058,
+  syscall: 'watch',
+  code: 'ENOENT',
+  path: 'C:\\Users\\bhand\\Downloads\\Fristname- Downloads\\Sun-Tracking-Main\\Sun-Tracking-Expo\\node_modules\\@react-native\\babel-plugin-codegen\\node_modules\\@react-native\\codegen\\lib\\generators\\components\\GeneratePropsJavaPojo',
+  filename: 'C:\\Users\\bhand\\Downloads\\Fristname- Downloads\\Sun-Tracking-Main\\Sun-Tracking-Expo\\node_modules\\@react-native\\babel-plugin-codegen\\node_modules\\@react-native\\codegen\\lib\\generators\\components\\GeneratePropsJavaPojo'
+}
+
+Node.js v22.19.0

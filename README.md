@@ -18,7 +18,17 @@ npm run build
 npm run preview
 ```
 
-No API keys required:
+## Mobile / store apps
+
+| App | Path | Package |
+|-----|------|---------|
+| Capacitor (recommended for stores) | `Sun-Tracking-Mobile/` | `com.shadelane.app` |
+| Expo (alternate) | `Sun-Tracking-Expo/` | `com.shadelane.expo` |
+
+Publish guide: **[STORE_PUBLISH.md](./STORE_PUBLISH.md)**  
+Listing + Data safety drafts: `store/`
+
+No API keys required for the Capacitor/web builds:
 
 - Place search — [Open-Meteo Geocoding](https://open-meteo.com/en/docs/geocoding-api)
 - Reverse geocode (map pins) — [Nominatim](https://nominatim.org/)

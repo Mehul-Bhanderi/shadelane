@@ -4,3 +4,11 @@ dist
 .DS_Store
 *.local
 .vite
+.expo
+
+# Disabled inner repo of the flattened Expo app
+.git.disabled/
+
+# Secrets
+.env
+.env.local
