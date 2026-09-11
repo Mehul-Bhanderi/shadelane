@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — ShadeLane</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #102532;
+        --teal: #1f6f6a;
+        --bg: #f4f8fa;
+      }
+      body {
+        margin: 0;
+        font-family: Figtree, system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.55;
+      }
+      main {
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem 3rem;
+      }
+      h1 {
+        font-family: Georgia, serif;
+        color: var(--teal);
+        margin: 0 0 0.25rem;
+      }
+      .meta {
+        color: #3a5160;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+      h2 {
+        font-size: 1.1rem;
+        margin-top: 1.75rem;
+      }
+      a {
+        color: var(--teal);
+      }
+      ul {
+        padding-left: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Privacy Policy</h1>
+      <p class="meta">ShadeLane · Last updated: 11 September 2026</p>
+
+      <p>
+        ShadeLane (“the App”) helps you choose a seat side based on sun position along a route.
+        This policy explains what data is used, where it goes, and what we do <em>not</em> collect.
+      </p>
+
+      <h2>1. Summary</h2>
+      <ul>
+        <li>No accounts, no advertising SDKs, no analytics or crash reporters by default.</li>
+        <li>Location is used only when you ask (for example, “Use my location”).</li>
+        <li>Trip preferences and recent trips stay on your device.</li>
+        <li>Routing and place lookup use third-party public map services over HTTPS.</li>
+      </ul>
+
+      <h2>2. Data on your device</h2>
+      <p>The App may store locally (browser storage):</p>
+      <ul>
+        <li>Recent trip origins, destinations, stops, mode, preference, and departure time</li>
+        <li>Unit preference (km / mi) and map theme (light / dark)</li>
+      </ul>
+      <p>You can clear recent trips from Settings.</p>
+
+      <h2>3. Location</h2>
+      <p>
+        If you tap “Use my location,” the App requests location only while in use. Coordinates set
+        the trip origin. When reverse-geocoding, coordinates are sent to
+        <a href="https://nominatim.openstreetmap.org/">OpenStreetMap Nominatim</a>.
+        You can always type addresses instead.
+      </p>
+
+      <h2>4. Data sent over the network</h2>
+      <ul>
+        <li><strong>Open-Meteo Geocoding</strong> — place search</li>
+        <li><strong>OSRM public router</strong> — route geometry</li>
+        <li><strong>Nominatim</strong> — reverse geocoding</li>
+        <li><strong>CARTO / OpenStreetMap</strong> — map tiles</li>
+        <li><strong>Google Fonts / CDN</strong> — fonts and Leaflet CSS on web builds</li>
+      </ul>
+
+      <h2>5. Contact</h2>
+      <p>
+        <a href="mailto:support@shadelane.app">support@shadelane.app</a>
+        (replace before public launch).
+      </p>
+
+      <p><a href="./terms.html">Terms of Use</a></p>
+    </main>
+  </body>
+</html>

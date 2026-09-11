@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Soft ground -->
+    <path
+        android:fillColor="#0F4A47"
+        android:pathData="M18,78 C34,70 52,68 72,72 C84,74 94,78 102,84 L102,102 L18,102 Z" />
+    <!-- Road band -->
+    <path
+        android:fillColor="#C5D9E4"
+        android:pathData="M30,92 L48,64 L60,64 L78,92 Z" />
+    <path
+        android:fillColor="#1F6F6A"
+        android:pathData="M52,66 L56,66 L62,88 L50,88 Z" />
+    <!-- Sun disc -->
+    <path
+        android:fillColor="#E8923A"
+        android:pathData="M54,34 m-14,0 a14,14 0 1,0 28,0 a14,14 0 1,0 -28,0" />
+    <!-- Sun highlight -->
+    <path
+        android:fillColor="#F0B35A"
+        android:pathData="M48,28 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0" />
+    <!-- Rays -->
+    <path
+        android:fillColor="#F0B35A"
+        android:pathData="M52,14 h4 v8 h-4 z M52,46 h4 v8 h-4 z M34,32 h8 v4 h-8 z M66,32 h8 v4 h-8 z M39,19 l3,-3 6,6 -3,3 z M66,42 l3,-3 6,6 -3,3 z M39,45 l6,-6 3,3 -6,6 z M66,22 l6,-6 3,3 -6,6 z" />
+</vector>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>ShadeLane — Sit in sun or shade on every ride</title>
+    <meta
+      name="description"
+      content="ShadeLane recommends the best seat side based on your route and the sun’s position — for short city hops and long trips."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <div id="map" class="map" role="application" aria-label="Interactive route map"></div>
+
+      <aside class="panel" id="panel" aria-label="Directions">
+        <div class="panel__handle" id="panel-handle" aria-hidden="true"></div>
+
+        <header class="panel__head">
+          <a class="brand" href="/" aria-label="ShadeLane home">
+            <span class="brand__mark" aria-hidden="true"></span>
+            <span class="brand__name">ShadeLane</span>
+          </a>
+          <div class="panel__head-actions">
+            <button type="button" class="icon-btn" id="theme-btn" title="Toggle map theme" aria-label="Toggle map theme">
+              <span aria-hidden="true">◐</span>
+            </button>
+            <button type="button" class="icon-btn" id="units-btn" title="Toggle km / mi" aria-label="Toggle distance units">
+              km
+            </button>
+            <button type="button" class="icon-btn" id="settings-btn" title="Settings" aria-label="Open settings">
+              <span aria-hidden="true">⚙</span>
+            </button>
+            <button type="button" class="icon-btn panel__collapse" id="panel-toggle" title="Expand or collapse" aria-label="Expand or collapse panel">
+              <span aria-hidden="true">▾</span>
+            </button>
+          </div>
+        </header>
+
+        <p class="panel__tagline">Sun-smart seats for every journey</p>
+
+        <form class="directions" id="planner-form" autocomplete="off">
+          <div class="place-stack">
+            <div class="place-row">
+              <span class="place-dot place-dot--origin" aria-hidden="true"></span>
+              <label class="field field--grow">
+                <span class="visually-hidden">Origin</span>
+                <input
+                  id="origin-input"
+                  name="origin"
+                  type="text"
+                  placeholder="Choose starting point"
+                  required
+                  aria-autocomplete="list"
+                  aria-controls="origin-suggestions"
+                />
+                <ul id="origin-suggestions" class="suggestions" role="listbox" hidden></ul>
+              </label>
+              <button type="button" class="icon-btn" id="locate-btn" title="Use my location" aria-label="Use my location">
+                <span aria-hidden="true">◎</span>
+              </button>
+            </div>
+
+            <button type="button" class="swap-btn" id="swap-btn" title="Swap origin and destination" aria-label="Swap origin and destination">
+              ⇅
+            </button>
+
+            <div class="place-row place-row--via" id="via-row" hidden>
+              <span class="place-dot place-dot--via" aria-hidden="true"></span>
+              <label class="field field--grow">
+                <span class="visually-hidden">Stop</span>
+                <input
+                  id="via-input"
+                  name="via"
+                  type="text"
+                  placeholder="Add a stop"
+                  aria-autocomplete="list"
+                  aria-controls="via-suggestions"
+                />
+                <ul id="via-suggestions" class="suggestions" role="listbox" hidden></ul>
+              </label>
+              <button type="button" class="icon-btn" id="clear-via-btn" title="Remove stop" aria-label="Remove stop">×</button>
+            </div>
+
+            <div class="place-row">
+              <span class="place-dot place-dot--dest" aria-hidden="true"></span>
+              <label class="field field--grow">
+                <span class="visually-hidden">Destination</span>
+                <input
+                  id="destination-input"
+                  name="destination"
+                  type="text"
+                  placeholder="Choose destination"
+                  required
+                  aria-autocomplete="list"
+                  aria-controls="destination-suggestions"
+                />
+                <ul id="destination-suggestions" class="suggestions" role="listbox" hidden></ul>
+              </label>
+              <button type="button" class="icon-btn" id="add-via-btn" title="Add a stop" aria-label="Add a stop">+</button>
+            </div>
+          </div>
+
+          <div class="mode-tabs" role="tablist" aria-label="Journey mode">
+            <label class="mode-tab">
+              <input type="radio" name="mode" value="driving" checked />
+              <span>Drive</span>
+            </label>
+            <label class="mode-tab">
+              <input type="radio" name="mode" value="walking" />
+              <span>Walk</span>
+            </label>
+            <label class="mode-tab">
+              <input type="radio" name="mode" value="cycling" />
+              <span>Bike</span>
+            </label>
+          </div>
+
+          <div class="directions__meta">
+            <label class="field">
+              <span class="field__label">Depart</span>
+              <input id="depart-input" name="depart" type="datetime-local" required />
+            </label>
+            <fieldset class="pref">
+              <legend class="field__label">I want</legend>
+              <div class="pref__options" role="radiogroup" aria-label="Seat preference">
+                <label class="pref__option">
+                  <input type="radio" name="preference" value="shade" checked />
+                  <span>Shade</span>
+                </label>
+                <label class="pref__option">
+                  <input type="radio" name="preference" value="sun" />
+                  <span>Sun</span>
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <p class="map-hint" id="map-hint">
+            Tip: click the map to set points, or drag the pins.
+          </p>
+
+          <button type="submit" class="cta" id="submit-btn">Find my seat</button>
+          <p class="status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <section class="routes" id="routes-panel" hidden>
+          <h2 class="section-title">Routes</h2>
+          <div class="route-list" id="route-list" role="listbox" aria-label="Alternative routes"></div>
+        </section>
+
+        <section class="result" id="results" hidden>
+          <div class="verdict" id="verdict">
+            <p class="verdict__eyebrow" id="verdict-eyebrow">Recommendation</p>
+            <h2 class="verdict__title" id="verdict-title">—</h2>
+            <p class="verdict__body" id="verdict-body"></p>
+            <ul class="stats" id="stats"></ul>
+            <p class="note" id="limitation-note"></p>
+            <div class="result-actions">
+              <button type="button" class="ghost-btn" id="share-btn">Copy share link</button>
+              <button type="button" class="ghost-btn" id="copy-rec-btn">Copy advice</button>
+            </div>
+          </div>
+
+          <div class="scrubber-wrap">
+            <div class="scrubber__head">
+              <h3 class="section-title">Along the ride</h3>
+              <p class="scrubber__live" id="scrubber-live" aria-live="polite"></p>
+            </div>
+            <input
+              type="range"
+              id="scrubber"
+              class="scrubber"
+              min="0"
+              max="100"
+              value="0"
+              aria-label="Scrub along the route"
+            />
+            <div class="timeline" id="timeline" aria-hidden="true"></div>
+            <div class="timeline__axis">
+              <span id="timeline-start">Depart</span>
+              <span id="timeline-end">Arrive</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="recent" id="recent-section" hidden>
+          <h2 class="section-title">Recent</h2>
+          <ul class="recent-list" id="recent-list"></ul>
+        </section>
+
+        <footer class="panel__foot">
+          <span>OSRM · Open-Meteo · OSM</span>
+          <span>Clear-sky geometry only</span>
+        </footer>
+      </aside>
+
+      <div class="offline-banner" id="offline-banner" hidden role="status" aria-live="polite">
+        You’re offline. Search and routing need a network connection.
+      </div>
+
+      <div class="settings-sheet" id="settings-sheet" hidden>
+        <div class="settings-sheet__backdrop" id="settings-backdrop" tabindex="-1"></div>
+        <div
+          class="settings-sheet__panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="settings-title"
+        >
+          <header class="settings-sheet__head">
+            <h2 id="settings-title">Settings</h2>
+            <button type="button" class="icon-btn" id="settings-close" aria-label="Close settings">
+              ×
+            </button>
+          </header>
+
+          <div class="settings-sheet__body">
+            <section class="settings-group">
+              <h3 class="settings-group__title">Preferences</h3>
+              <label class="settings-row">
+                <span>Distance units</span>
+                <select id="settings-units" aria-label="Distance units">
+                  <option value="km">Kilometers</option>
+                  <option value="mi">Miles</option>
+                </select>
+              </label>
+              <label class="settings-row">
+                <span>Map theme</span>
+                <select id="settings-theme" aria-label="Map theme">
+                  <option value="light">Light</option>
+                  <option value="dark">Dark</option>
+                </select>
+              </label>
+              <label class="settings-row">
+                <span>Default seat preference</span>
+                <select id="settings-pref" aria-label="Default seat preference">
+                  <option value="shade">Prefer shade</option>
+                  <option value="sun">Prefer sun</option>
+                </select>
+              </label>
+            </section>
+
+            <section class="settings-group">
+              <h3 class="settings-group__title">Privacy &amp; data</h3>
+              <button type="button" class="settings-link" id="clear-recent-btn">
+                Clear recent trips
+              </button>
+              <a class="settings-link" href="/legal/privacy.html" id="privacy-link">Privacy Policy</a>
+              <a class="settings-link" href="/legal/terms.html" id="terms-link">Terms of Use</a>
+              <p class="settings-note">
+                Location is used only when you tap “Use my location.” Recent trips stay on this device.
+              </p>
+            </section>
+
+            <section class="settings-group">
+              <h3 class="settings-group__title">About</h3>
+              <p class="settings-about">
+                <strong>ShadeLane</strong> · v<span id="settings-version">1.0.0</span><br />
+                Sun-smart seat advice using clear-sky solar geometry.<br />
+                Map data © OpenStreetMap contributors · Routing via OSRM · Places via Open-Meteo
+              </p>
+              <a class="settings-link" href="mailto:support@shadelane.app">Contact support</a>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <div class="seat-card" id="seat-card" hidden>
+        <p class="seat-card__eyebrow" id="seat-card-eyebrow">Seat</p>
+        <p class="seat-card__title" id="seat-card-title">—</p>
+        <p class="seat-card__meta" id="seat-card-meta"></p>
+      </div>
+
+      <div class="map-legend" id="map-legend" hidden aria-hidden="true">
+        <span><i class="swatch swatch--left"></i> Sun left</span>
+        <span><i class="swatch swatch--right"></i> Sun right</span>
+        <span><i class="swatch swatch--neutral"></i> Front / back / night</span>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "appId": "com.shadelane.app",
+  "appName": "ShadeLane",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "Geolocation": {
+      "permissions": ["location"]
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#c5d9e4"
+    }
+  },
+  "android": {
+    "allowMixedContent": false
+  },
+  "ios": {
+    "scheme": "shadelane",
+    "contentInset": "automatic"
+  }
+}

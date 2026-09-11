@@ -1,0 +1,31 @@
+{
+  "name": "shadelane-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ShadeLane mobile — Capacitor wrapper for Android and iOS",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "sync": "npm run build && npx cap sync",
+    "android": "npm run sync && npx cap open android",
+    "ios": "npm run sync && npx cap open ios",
+    "cap:android": "npx cap open android",
+    "cap:ios": "npx cap open ios",
+    "release:sync": "npm run sync"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.2",
+    "vite": "^6.0.0"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.2",
+    "@capacitor/app": "^7.0.1",
+    "@capacitor/core": "^7.4.2",
+    "@capacitor/geolocation": "^7.1.2",
+    "@capacitor/ios": "^7.4.2",
+    "@capacitor/status-bar": "^7.0.1",
+    "leaflet": "^1.9.4"
+  }
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — ShadeLane</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #102532;
+        --teal: #1f6f6a;
+        --bg: #f4f8fa;
+      }
+      body {
+        margin: 0;
+        font-family: Figtree, system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.55;
+      }
+      main {
+        max-width: 42rem;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem 3rem;
+      }
+      h1 {
+        font-family: Georgia, serif;
+        color: var(--teal);
+        margin: 0 0 0.25rem;
+      }
+      .meta {
+        color: #3a5160;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+      h2 {
+        font-size: 1.1rem;
+        margin-top: 1.75rem;
+      }
+      a {
+        color: var(--teal);
+      }
+      ul {
+        padding-left: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Privacy Policy</h1>
+      <p class="meta">ShadeLane · Last updated: 11 September 2026</p>
+
+      <p>
+        ShadeLane (“the App”) helps you choose a seat side based on sun position along a route.
+        This policy explains what data is used, where it goes, and what we do <em>not</em> collect.
+      </p>
+
+      <h2>1. Summary</h2>
+      <ul>
+        <li>No accounts, no advertising SDKs, no analytics or crash reporters by default.</li>
+        <li>Location is used only when you ask (for example, “Use my location”).</li>
+        <li>Trip preferences and recent trips stay on your device.</li>
+        <li>Routing and place lookup use third-party public map services over HTTPS.</li>
+      </ul>
+
+      <h2>2. Data on your device</h2>
+      <p>The App may store locally (WebView / AsyncStorage / localStorage):</p>
+      <ul>
+        <li>Recent trip origins, destinations, stops, mode, preference, and departure time</li>
+        <li>Unit preference (km / mi) and map theme (light / dark)</li>
+      </ul>
+      <p>
+        You can clear recent trips from Settings. Uninstalling the App removes local data.
+        Android backup of app data is disabled for ShadeLane store builds.
+      </p>
+
+      <h2>3. Location</h2>
+      <p>
+        If you tap “Use my location,” the App requests <strong>foreground / when-in-use</strong>
+        location only. Coordinates are used to set the trip origin on the map. The App does not
+        track you in the background and does not request Always location for its own features.
+      </p>
+      <p>
+        When reverse-geocoding a map pin or GPS fix, coordinates are sent to
+        <a href="https://nominatim.openstreetmap.org/">OpenStreetMap Nominatim</a>
+        to obtain a place label. You can always type addresses instead of sharing location.
+      </p>
+
+      <h2>4. Data sent over the network</h2>
+      <p>To provide routes and search, the App contacts these services:</p>
+      <ul>
+        <li>
+          <strong>Open-Meteo Geocoding</strong> — place name search queries you type
+        </li>
+        <li>
+          <strong>OSRM public router</strong> — coordinates for origin, destination, and optional stop
+          to compute route geometry and travel time
+        </li>
+        <li>
+          <strong>Nominatim</strong> — reverse geocoding for map pins / GPS origin labels
+        </li>
+        <li>
+          <strong>CARTO / OpenStreetMap</strong> — map tile images (web / Capacitor builds)
+        </li>
+        <li>
+          <strong>Google Maps / Apple Maps</strong> — map rendering on some native builds that use the
+          platform map SDK (tile and API traffic may include approximate device region as required by
+          the map provider)
+        </li>
+        <li>
+          <strong>Google Fonts / CDN CSS</strong> — optional web font and Leaflet stylesheet loads on
+          web-based builds
+        </li>
+      </ul>
+      <p>
+        ShadeLane does not operate its own user database. Third parties process requests under their
+        own terms and privacy policies. Use search and routing reasonably; public demo endpoints may
+        rate-limit heavy traffic.
+      </p>
+
+      <h2>5. Children</h2>
+      <p>
+        The App is not directed at children under 13 (or the equivalent minimum age in your region)
+        and does not knowingly collect personal information from children.
+      </p>
+
+      <h2>6. Your choices</h2>
+      <ul>
+        <li>Deny location permission and enter places manually</li>
+        <li>Clear recent trips in Settings</li>
+        <li>Stop network use by closing the App or disabling connectivity</li>
+      </ul>
+
+      <h2>7. Contact</h2>
+      <p>
+        Questions about privacy:
+        <a href="mailto:support@shadelane.app">support@shadelane.app</a>
+        (replace with your real support address before store submission).
+      </p>
+
+      <h2>8. Changes</h2>
+      <p>
+        We may update this policy when features or third-party services change. The “Last updated”
+        date at the top will change when we do.
+      </p>
+
+      <p><a href="./terms.html">Terms of Use</a></p>
+    </main>
+  </body>
+</html>
